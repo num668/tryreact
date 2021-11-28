@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import TryButton from './UI/Button/TryButton';
+import TryInput from './UI/Input/TryInput';
 
 function TodoForm({addTodoItem}) {
   const [todoItem, setTodoItem] = useState({title: '', done: false});
@@ -11,11 +13,11 @@ function TodoForm({addTodoItem}) {
 
   return (
     <div>
-      <input
+      <TryInput
         value={todoItem.title}
         onChange={e => setTodoItem({...todoItem, title: e.target.value })}
       />
-      <button onClick={handleAddTodoItem}>Add</button>
+      <TryButton onClick={handleAddTodoItem}>Add</TryButton>
     </div>
   );
 };

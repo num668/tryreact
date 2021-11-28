@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import TryInput from './UI/Input/TryInput';
+import TryButton from './UI/Button/TryButton';
 
 function TodoItem({todoItem, checkTodoItem, removeTodoItem}) {
   const [todoCheck, setTodoCheck] = useState(todoItem.done);
@@ -17,9 +19,9 @@ function TodoItem({todoItem, checkTodoItem, removeTodoItem}) {
 
   return (
     <div>
-        <input type="checkbox" checked={todoCheck} onChange={handleCheckTodoItem}/>
+        <TryInput type="checkbox" checked={todoCheck} onChange={handleCheckTodoItem}/>
         <span>{todoItem.title}</span>
-        <button onClick={handleRemoveTodoItem}>remove</button>
+        <TryButton onClick={handleRemoveTodoItem}>Remove</TryButton>
     </div>
   );
 }
