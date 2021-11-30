@@ -1,10 +1,8 @@
 import React from 'react';
-import classes from './TryInput.module.css';
+import classes from './try-input.module.css';
 
-function TryInput (props) {
+export const TryInput = (props) => {
     return (
         <input className={classes.tryInput} {...props}/>
     );
 };
-
-export default TryInput;

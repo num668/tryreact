@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
-import TodoList from './TodoList.jsx';
-import TodoForm from './TodoForm.jsx';
+import {TodoList} from './todo-list.jsx';
+import {TodoForm} from './todo-form.jsx';
+import {TodoFilter} from './todo-filter.jsx';
+import {useTodos} from './hooks/use-todo.jsx';
 
-function Todo() {
+export const Todo = () => {
   // reset local storage
   //localStorage.removeItem('todo'); 
-
-  /*const [todoList, setTodoList] = useState([
-    {id: 1, title: "123", done: false},
-    {id: 2, title: "321", done: false}
-  ]);*/
   
   const [todoList, setTodoList] = useState((() => {
     const storage = JSON.parse(localStorage.getItem('todoList'));
@@ -23,7 +20,9 @@ function Todo() {
       return [];
     }
   })());
-  
+  const [filterTodo, setFilterTodo] = useState({title: '', done: undefined});
+  const filteredTodoList = useTodos(todoList, filterTodo);
+
   const saveTodoList = (list) => {
     if (Array.isArray(list)) {
       localStorage.setItem('todoList', JSON.stringify(list.map((item) => {
@@ -53,10 +52,21 @@ function Todo() {
 
   return (
     <div>
-      <TodoForm addTodoItem={addTodoItem}/>
-      <TodoList todoList={todoList} removeTodoItem={removeTodoItem} checkTodoItem={checkTodoItem}/>
+      <TodoForm
+        placeholder="Input title ToDo"
+        caption="Add new todo"
+        addTodoItem={addTodoItem}
+      />      
+      <hr/>
+      <TodoFilter
+        filterTodo={filterTodo}
+        setFilterTodo={setFilterTodo}
+      />
+      <TodoList
+        todoList={filteredTodoList}
+        removeTodoItem={removeTodoItem}
+        checkTodoItem={checkTodoItem}
+      />
     </div>
   );
 }
-
-export default Todo;

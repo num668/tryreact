@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import TryInput from './UI/Input/TryInput';
-import TryButton from './UI/Button/TryButton';
+import {TryInput} from './ui/input/try-input.jsx';
+import {TryButton} from './ui/button/try-button.jsx';
 
-function TodoItem({todoItem, checkTodoItem, removeTodoItem}) {
+export const TodoItem = ({todoItem, checkTodoItem, removeTodoItem}) => {
   const [todoCheck, setTodoCheck] = useState(todoItem.done);
   
   const handleCheckTodoItem = (e) => {
@@ -25,5 +25,3 @@ function TodoItem({todoItem, checkTodoItem, removeTodoItem}) {
     </div>
   );
 }
-
-export default TodoItem;

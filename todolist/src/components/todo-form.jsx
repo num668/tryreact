@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import TryButton from './UI/Button/TryButton';
-import TryInput from './UI/Input/TryInput';
+import {TryButton} from './ui/button/try-button.jsx';
+import {TryInput} from './ui/input/try-input.jsx';
 
-function TodoForm({addTodoItem}) {
+export const TodoForm = ({addTodoItem, ...props}) => {
   const [todoItem, setTodoItem] = useState({title: '', done: false});
   
   const handleAddTodoItem = () => {
@@ -14,12 +14,11 @@ function TodoForm({addTodoItem}) {
   return (
     <div>
       <TryInput
+        placeholder={props.placeholder}
         value={todoItem.title}
         onChange={e => setTodoItem({...todoItem, title: e.target.value })}
       />
-      <TryButton onClick={handleAddTodoItem}>Add</TryButton>
+      <TryButton onClick={handleAddTodoItem}>{props.caption ?? "Add"}</TryButton>
     </div>
   );
 };
-
-export default TodoForm;
