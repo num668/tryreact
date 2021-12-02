@@ -1,28 +1,31 @@
 import React from 'react';
-import {TryInput} from './ui/input/try-input.jsx';
-import {TrySelect} from './ui/select/try-select.jsx';
+import {TryInput} from '../ui/try-input';
+import {TrySelect} from '../ui//try-select';
+import classes from './index.module.css';
 
-export const TodoFilter = ({filterTodo, setFilterTodo, ...props}) => {
+export const TodoFilter = ({filter, onTodoFilter}) => {
     const handleSetFilterTodo = (filter) => {
-        if (setFilterTodo instanceof Function) {
-            setFilterTodo(filter);
+        if (onTodoFilter instanceof Function) {
+            onTodoFilter(filter);
         }
     }
     return (
-        <div>
+        <div className={classes.todoFilter}>
             <TryInput 
                 placeholder="Filter"
-                value={filterTodo.title}
-                onChange={(e) => {handleSetFilterTodo({...filterTodo, title: e.target.value})}}
+                value={filter.title}
+                onChange={(e) => {
+                    handleSetFilterTodo({...filter, title: e.target.value});
+                }}
             />
             <TrySelect
-                value={filterTodo.done}
+                value={filter.done}
                 options={[
                     {value: '', title: "do not filter by done"},
                     {value: 'true', title: "show only done"},
                     {value: 'false', title: "show only not done"}
                 ]}
-                onChange={(e) => {handleSetFilterTodo({...filterTodo, done: e.target.value === ''
+                onChange={(e) => {handleSetFilterTodo({...filter, done: e.target.value === ''
                     ?
                         undefined
                     :

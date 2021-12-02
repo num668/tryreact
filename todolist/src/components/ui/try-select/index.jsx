@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './try-select.module.css';
+import classes from './index.module.css';
 
 export const TrySelect = ({options, value, children, ...props}) => {
     const handleOptionsFill = () => {

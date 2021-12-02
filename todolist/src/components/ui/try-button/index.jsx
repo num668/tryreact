@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './try-button.module.css';
+import classes from './index.module.css';
 
 export const TryButton = ({children, ...props}) => {
     return (
