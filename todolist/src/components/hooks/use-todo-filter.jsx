@@ -1,21 +1,21 @@
-import {useState, useMemo} from "react";
+import {useState} from "react";
 
-export const useTodoFilter = (todoList, filter) => {
-    const [_filter, setTodoFilter] = useState(filter);
-
-    todoList = useMemo(() => {
-        return _filter.done === undefined ? todoList : todoList.filter((item) => item.done === _filter.done);
-    }, [todoList, _filter.done]);
-    
-    todoList = useMemo(() => {
-        return todoList.filter((item) => item.title.toLocaleLowerCase().includes(_filter.title.toLocaleLowerCase()));
-    }, [todoList, _filter.title]);
+export const useTodoFilter = (todoFilter, doTodoFilter) => {
+    const [_todoFilter, setTodoFilter] = useState(todoFilter);
 
     return {
-        todoList,
-        filter: _filter,
-        onTodoFilter: (item) => {
-            setTodoFilter(item);
+        todoFilter: _todoFilter,
+        onTodoTitleFilter: (e) => {
+            todoFilter = {...todoFilter, title: e.target.value};
+            if (doTodoFilter instanceof Function)
+                doTodoFilter(todoFilter);
+            setTodoFilter(todoFilter);
+        },
+        onTodoCheckFilter: (e) => {
+            todoFilter = {...todoFilter, done: (e.target.value === '' ? undefined : e.target.value === 'false' ? false : true)};
+            if (doTodoFilter instanceof Function)
+                doTodoFilter(todoFilter);
+            setTodoFilter(todoFilter);
         }
     };
 }

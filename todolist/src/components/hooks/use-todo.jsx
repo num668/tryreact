@@ -1,7 +1,7 @@
-import {useState} from "react";
+import { useState, useMemo } from "react";
 
-export const useTodoList = () => {
-    const loadTodo = () => {
+export const useTodo = () => {
+    const loadTodoList = () => {
         const storage = JSON.parse(localStorage.getItem('todoList'));
         if (Array.isArray(storage)) {
             let currentId = Date.now() - storage.length;
@@ -11,8 +11,6 @@ export const useTodoList = () => {
         }
         return [];
     };
-
-    const [_todoList, setValues] = useState(loadTodo());
 
     const saveTodo = (todoList) => {
         if (Array.isArray(todoList)) {
@@ -24,20 +22,41 @@ export const useTodoList = () => {
             localStorage.setItem('todoList', "[]");
     };
 
+    const [todoList, setTodoList] = useState(loadTodoList());
+    const [todoFilter, setTodoFilter] = useState({title: '', done: undefined});
+
+    let copyTodoList = todoList;
+    
+    copyTodoList = useMemo(() => {
+        return todoFilter.done !== undefined
+            ? copyTodoList.filter((item) => item.done === !!todoFilter.done)
+            : copyTodoList;
+    }, [copyTodoList, todoFilter.done]);
+    
+    copyTodoList = useMemo(() => {
+        return copyTodoList.filter(
+            (item) => item.title.toLocaleLowerCase().includes(todoFilter.title.toLocaleLowerCase())
+        );
+    }, [copyTodoList, todoFilter.title]);
+
     return {
-        todoList: _todoList,
-        todoAdd: (item) => {
-            const list = [..._todoList, {...item, key: Date.now()}];
+        todoList: copyTodoList,
+        todoFilter,
+        doTodoAdd: (item) => {
+            const list = [...todoList, {...item, key: Date.now()}];
             saveTodo(list);
-            setValues(list);
+            setTodoList(list);
         },
-        todoDelete: (item) => {
-            const list = _todoList.filter(_item => item !== _item);
+        doTodoDelete: (item) => {
+            const list = todoList.filter(_item => item !== _item);
             saveTodo(list)
-            setValues(list);
+            setTodoList(list);
         },
-        todoCheck: (item) => {
-            saveTodo(_todoList);
+        doTodoCheck: (item) => {
+            saveTodo(todoList);
+        },
+        doTodoFilter: (item) => {
+            setTodoFilter(item ? {title: String(item.title), done: Boolean(item.done)} : {title: '', done: true})
         }
     }
 }

@@ -1,20 +1,20 @@
 import {useState} from "react";
 
-export const useTodoForm = (todoItem, todoAdd) => {
-    todoItem = todoItem ?? {title: '', done: false};
-    const [title, setTodoTitle] = useState(todoItem.title);
+export const useTodoForm = (todoItem, doTodoAdd) => {
+    const [todoTitle, setTodoTitle] = useState(todoItem.title);
 
     return {
-        todoItem,
+        todoTitle,
         onTodoChange: (e) => {
-            todoItem.title = title;
-            setTodoTitle(e.target.value);
+            todoItem.title = e.target.value;
+            setTodoTitle(todoItem.title);
         },
         onTodoAdd: (e) => {
-            if (todoAdd instanceof Function) {
-                todoAdd(todoItem);
+            todoItem.title = todoTitle;
+            if (doTodoAdd instanceof Function) {
+                doTodoAdd(todoItem);
             }
-            setTodoTitle(title);
+            setTodoTitle('');
         }
     }
 }

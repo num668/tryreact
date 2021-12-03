@@ -1,30 +1,30 @@
 import React from 'react';
 import { TodoList } from '../todo-list';
 import { TodoForm } from '../todo-form';
-import { useTodoList } from '../hooks/use-todo.jsx';
+import { TodoFilter } from '../todo-filter';
+import { useTodo } from '../hooks/use-todo.jsx';
 import classes from './index.module.css';
 
 export const Todo = () => {
   //-reset local storage-
   //localStorage.removeItem('todo'); 
   
-  const todo = useTodoList();
+  const todo = useTodo();
 
   return (
     <div className={classes.todo}>
       <TodoForm
-        todoItem={{title: '', done: false}}
-        todoAdd={todo.todoAdd}
+        doTodoAdd={todo.doTodoAdd}
       />   
       <hr/>
-      {/*<TodoFilter
-        filter={todoFilter.filter}
-        onTodoFilter={todoFilter.onTodoFilter}
-      />*/}
+      <TodoFilter
+        todoFilter={todo.todoFilter}
+        doTodoFilter={todo.doTodoFilter}
+      />
       <TodoList
         todoList={todo.todoList}
-        todoDelete={todo.todoDelete}
-        todoCheck={todo.todoCheck}
+        doTodoDelete={todo.doTodoDelete}
+        doTodoCheck={todo.doTodoCheck}
       />
     </div>
   );

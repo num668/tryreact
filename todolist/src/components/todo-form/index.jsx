@@ -4,17 +4,17 @@ import { TryButton } from '../ui/try-button';
 import { TryInput } from '../ui/try-input';
 import classes from './index.module.css';
 
-export const TodoForm = ({todoItem, todoAdd}) => {
-  const todoForm = useTodoForm(todoItem, todoAdd);
+export const TodoForm = ({todoItem, doTodoAdd}) => {
+  const hookTodoForm = useTodoForm(todoItem ?? {title: '', done: false}, doTodoAdd);
 
   return (
     <div className={classes.todoForm}>
       <TryInput
         placeholder="Input title 'To Do'"
-        value={todoForm.todoItem.title}
-        onChange={todoForm.onTodoChange}
+        value={hookTodoForm.todoTitle}
+        onChange={hookTodoForm.onTodoChange}
       />
-      <TryButton onClick={todoForm.onTodoAdd}>Add new todo</TryButton>
+      <TryButton onClick={hookTodoForm.onTodoAdd}>Add new todo</TryButton>
     </div>
   );
 };
