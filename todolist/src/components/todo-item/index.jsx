@@ -3,11 +3,11 @@ import { TryInput } from '../ui/try-input';
 import { TryButton } from '../ui/try-button';
 import { useTodoItem } from '../hooks/use-todo-item';
 
-export const TodoItem = ({todoItem, doTodoCheck, doTodoDelete}) => {
+export const TodoItem = ({todoItem, doTodoCheck, doTodoDelete, ...props}) => {
   const hookTodoItem = useTodoItem(todoItem, doTodoCheck, doTodoDelete);
 
   return (
-    <div className="todoItem">
+    <div className="todoItem" {...props}>
         <div>
           <TryInput
             type="checkbox"

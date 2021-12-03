@@ -1,7 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useTodoList } from '../hooks/use-todo-list';
 import { TodoFilter } from '../todo-filter';
 import { TodoItem } from '../todo-item';
+
+const TodoItemStylerd = styled(TodoItem)`
+  background-color: ${(props) => Number(props.index) & 1 ? "#fdd": "fff"};
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 export const TodoList = ({todoList, doTodoCheck, doTodoDelete}) => {
   const hookTodoList = useTodoList(todoList);
@@ -14,7 +23,8 @@ export const TodoList = ({todoList, doTodoCheck, doTodoDelete}) => {
 
     {hookTodoList.todoList.length
       ? <div className="todoList">
-          {hookTodoList.todoList.map(item => <TodoItem
+          {hookTodoList.todoList.map((item, index) => <TodoItemStylerd
+            index={index}
             key={item.key}
             todoItem={item}
             doTodoCheck={doTodoCheck}
