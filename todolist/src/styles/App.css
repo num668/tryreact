@@ -17,13 +17,6 @@
     border: 1px solid #800;
 }
 
-.todoItem {
-    display: flex;
-    padding: 10px;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .todoForm {
     display: flex;
     padding: 10px;

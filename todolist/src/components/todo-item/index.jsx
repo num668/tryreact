@@ -7,7 +7,7 @@ export const TodoItem = ({todoItem, doTodoCheck, doTodoDelete, ...props}) => {
   const hookTodoItem = useTodoItem(todoItem, doTodoCheck, doTodoDelete);
 
   return (
-    <div className="todoItem" {...props}>
+    <div {...props}>
         <div>
           <TryInput
             type="checkbox"
