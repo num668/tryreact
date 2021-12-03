@@ -7,14 +7,16 @@ export const useTodoFilter = (todoFilter, doTodoFilter) => {
         todoFilter: _todoFilter,
         onTodoTitleFilter: (e) => {
             todoFilter = {...todoFilter, title: e.target.value};
-            if (doTodoFilter instanceof Function)
+            if (doTodoFilter instanceof Function) {
                 doTodoFilter(todoFilter);
+            }
             setTodoFilter(todoFilter);
         },
         onTodoCheckFilter: (e) => {
             todoFilter = {...todoFilter, done: (e.target.value === '' ? undefined : e.target.value === 'false' ? false : true)};
-            if (doTodoFilter instanceof Function)
+            if (doTodoFilter instanceof Function) {
                 doTodoFilter(todoFilter);
+            }
             setTodoFilter(todoFilter);
         }
     };

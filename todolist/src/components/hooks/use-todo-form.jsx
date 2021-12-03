@@ -10,6 +10,7 @@ export const useTodoForm = (todoItem, doTodoAdd) => {
             setTodoTitle(todoItem.title);
         },
         onTodoAdd: (e) => {
+            e.preventDefault();
             todoItem.title = todoTitle;
             if (doTodoAdd instanceof Function) {
                 doTodoAdd(todoItem);

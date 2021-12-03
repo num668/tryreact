@@ -23,25 +23,9 @@ export const useTodo = () => {
     };
 
     const [todoList, setTodoList] = useState(loadTodoList());
-    const [todoFilter, setTodoFilter] = useState({title: '', done: undefined});
-
-    let copyTodoList = todoList;
-    
-    copyTodoList = useMemo(() => {
-        return todoFilter.done !== undefined
-            ? copyTodoList.filter((item) => item.done === !!todoFilter.done)
-            : copyTodoList;
-    }, [copyTodoList, todoFilter.done]);
-    
-    copyTodoList = useMemo(() => {
-        return copyTodoList.filter(
-            (item) => item.title.toLocaleLowerCase().includes(todoFilter.title.toLocaleLowerCase())
-        );
-    }, [copyTodoList, todoFilter.title]);
 
     return {
-        todoList: copyTodoList,
-        todoFilter,
+        todoList,
         doTodoAdd: (item) => {
             const list = [...todoList, {...item, key: Date.now()}];
             saveTodo(list);
@@ -54,9 +38,6 @@ export const useTodo = () => {
         },
         doTodoCheck: (item) => {
             saveTodo(todoList);
-        },
-        doTodoFilter: (item) => {
-            setTodoFilter(item ? {title: String(item.title), done: Boolean(item.done)} : {title: '', done: true})
         }
     }
 }
