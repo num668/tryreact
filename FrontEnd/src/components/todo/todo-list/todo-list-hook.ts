@@ -1,6 +1,8 @@
 import { useState, useMemo } from "react";
+import { TTodoList } from "../commons/todo-types";
+import { TTodoListHook } from "./todo-list-types";
 
-export const useTodoList = (todoList) => {
+export const useTodoList = (todoList: TTodoList): TTodoListHook => {
     const [todoFilter, setTodoFilter] = useState({title: '', done: undefined});
     
     const todoList1 = useMemo(() => {
@@ -18,7 +20,7 @@ export const useTodoList = (todoList) => {
     return {
         todoList: todoList2,
         todoFilter,
-        doTodoFilter: (item) => {
+        doTodoFilter: (item: any) => {
             setTodoFilter(item ? {title: String(item.title), done: item.done} : {title: '', done: true})
         }
     }

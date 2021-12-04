@@ -1,18 +1,21 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
+import type { TTodoHook } from "./todo-types"
+import type {  TTodoItemContent, TTodoItem, TTodoList } from "./commons/todo-types"
 
-export const useTodo = () => {
-    const loadTodoList = () => {
-        const storage = JSON.parse(localStorage.getItem('todoList'));
-        if (Array.isArray(storage)) {
-            let currentId = Date.now() - storage.length;
-            return storage.map((item) => {
+export const useTodo = (): TTodoHook => {
+    const loadTodoList = (): TTodoList => {
+        const storage = localStorage.getItem('todoList');
+        const json = JSON.parse(storage ?? '');
+        if (Array.isArray(json)) {
+            let currentId = Date.now() - json.length;
+            return json.map((item) => {
                 return {key: currentId++, title: String(item.title), done: Boolean(item.done)};
             });
         }
         return [];
     };
 
-    const saveTodo = (todoList) => {
+    const saveTodo = (todoList: TTodoList): void => {
         if (Array.isArray(todoList)) {
             localStorage.setItem('todoList', JSON.stringify(todoList.map((item) => {
                 return {title: String(item.title), done: Boolean(item.done) }
@@ -26,17 +29,17 @@ export const useTodo = () => {
 
     return {
         todoList,
-        doTodoAdd: (item) => {
+        doTodoAdd: (item: TTodoItemContent) => {
             const list = [...todoList, {...item, key: Date.now()}];
             saveTodo(list);
             setTodoList(list);
         },
-        doTodoDelete: (item) => {
+        doTodoDelete: (item: TTodoItemContent) => {
             const list = todoList.filter(_item => item !== _item);
             saveTodo(list)
             setTodoList(list);
         },
-        doTodoCheck: (item) => {
+        doTodoCheck: (item: TTodoItemContent) => {
             saveTodo(todoList);
         }
     }

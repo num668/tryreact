@@ -1,9 +1,8 @@
-import React from 'react';
 import { TodoList } from './todo-list';
 import { TodoForm } from './todo-form';
-import { useTodo } from './use-todo.jsx';
+import { useTodo } from "./todo-hook";
 
-export const Todo = () => {
+export const Todo = (): JSX.Element => {
   //-reset local storage-
   //localStorage.removeItem('todo'); 
   
@@ -12,6 +11,7 @@ export const Todo = () => {
   return (
     <div className="todo">
       <TodoForm
+        todoItem={undefined}
         doTodoAdd={todo.doTodoAdd}
       />   
       <TodoList

@@ -1,7 +1,6 @@
-import React from 'react';
-import classes from './index.module.css';
+import classes from './base-select.module.css';
 
-export const TrySelect = ({options, value, children, ...props}) => {
+export const BaseSelect = ({options, value, ...props}) => {
     const handleOptionsFill = () => {
         if (Array.isArray(options)) {
             return options.map((option, index) => {
@@ -12,7 +11,7 @@ export const TrySelect = ({options, value, children, ...props}) => {
     return (
         <select className={classes.trySelect} value={value} {...props}>
             {handleOptionsFill()}
-            {children}
+            {props.children}
         </select>
     );
 };

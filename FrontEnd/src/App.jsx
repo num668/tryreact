@@ -1,11 +1,8 @@
-import React from 'react';
-import {Todo} from './components/todo';
-import "./styles/App.css";
+import { Todo } from './components/todo';
+import "./styles/app.css";
 
-function App() {
+export default () => {
   return (
     <Todo/>
   );
 }
-
-export default App;
