@@ -1,7 +1,7 @@
 import React from 'react';
-import { TryInput } from '../ui/try-input';
-import { TryButton } from '../ui/try-button';
-import { useTodoItem } from '../hooks/use-todo-item';
+import { TryInput } from '../../../ui/try-input';
+import { TryButton } from '../../../ui/try-button';
+import { useTodoItem } from './use-todo-item';
 
 export const TodoItem = ({todoItem, doTodoCheck, doTodoDelete, ...props}) => {
   const hookTodoItem = useTodoItem(todoItem, doTodoCheck, doTodoDelete);

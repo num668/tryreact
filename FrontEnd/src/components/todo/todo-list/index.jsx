@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTodoList } from '../hooks/use-todo-list';
-import { TodoFilter } from '../todo-filter';
-import { TodoItem } from '../todo-item';
+import { useTodoList } from './use-todo-list';
+import { TodoFilter } from './todo-filter';
+import { TodoItem } from './todo-item';
 
 const TodoItemStylerd = styled(TodoItem)`
   background-color: ${(props) => Number(props.index) & 1 ? "#fdd": "fff"};

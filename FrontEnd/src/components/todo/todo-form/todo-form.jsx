@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTodoForm } from '../hooks/use-todo-form';
-import { TryInput } from '../ui/try-input';
+import { useTodoForm } from './use-todo-form';
+import { TryInput } from '../../ui/try-input';
 
 export const TodoForm = ({todoItem, doTodoAdd}) => {
   const hookTodoForm = useTodoForm(todoItem ?? {title: '', done: false}, doTodoAdd);
