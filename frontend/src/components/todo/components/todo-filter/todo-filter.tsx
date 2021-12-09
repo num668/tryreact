@@ -1,10 +1,10 @@
-import { TryInput } from '../../../../ui/base-input';
-import { TrySelect } from '../../../../ui/base-select';
-import { useTodoFilter } from './todo-filter-hook';
-import { TTodoFilter } from './todo-filter-types';
-import { TTodoFuncFilter } from './todo-filter-types'; 
+import { TryInput } from '../../../ui/base-input';
+import { TrySelect } from '../../../ui/base-select';
+import { useTodoFilter } from './todo-filter.state';
+import { ITodoFilterInterface } from './types';
+import { TTodoFilterFunction } from './types'; 
 
-export const TodoFilter = (props: {todoFilter: TTodoFilter, doTodoFilter: TTodoFuncFilter}): JSX.Element => {
+export const TodoFilter = (props: {todoFilter: ITodoFilterInterface, doTodoFilter: TTodoFilterFunction}): JSX.Element => {
     const hookTodoFilter = useTodoFilter(props.todoFilter, props.doTodoFilter);
 
     return (

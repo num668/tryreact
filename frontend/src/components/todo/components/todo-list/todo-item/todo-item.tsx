@@ -1,10 +1,10 @@
 import React from 'react';
 import { TryInput } from '../../../../ui/base-input';
 import { TryButton } from '../../../../ui/base-button';
-import { useTodoItem } from './todo-item-hook';
-import { TTodoFunc, TTodoItem } from '../../../commons/todo-types';
+import { useTodoItem } from './todo-item.state';
+import { TTodoFunction, ITodoItemInterface } from '../../../../../commons/types';
 
-export const TodoItem = (props: {className: string; todoItem: TTodoItem, doTodoCheck: TTodoFunc, doTodoDelete: TTodoFunc}): JSX.Element => {
+export const TodoItem = (props: {className: string; todoItem: ITodoItemInterface, doTodoCheck: TTodoFunction, doTodoDelete: TTodoFunction}): JSX.Element => {
   const hookTodoItem = useTodoItem(props.todoItem, props.doTodoCheck, props.doTodoDelete);
 
   return (

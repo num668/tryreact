@@ -1,9 +1,9 @@
 import { useState } from "react";
-import type { TTodoHook } from "./todo-types"
-import type {  TTodoItemContent, TTodoItem, TTodoList } from "./commons/todo-types"
+import type { TTodoStateInterface } from "./types"
+import type {  TTodoContentInterface, TTodoItemsArray } from "../../commons/types"
 
-export const useTodo = (): TTodoHook => {
-    const loadTodoList = (): TTodoList => {
+export const useTodo = (): TTodoStateInterface => {
+    const loadTodoList = (): TTodoItemsArray => {
         const storage = localStorage.getItem('todoList');
         const json = JSON.parse(storage ?? '');
         if (Array.isArray(json)) {
@@ -15,7 +15,7 @@ export const useTodo = (): TTodoHook => {
         return [];
     };
 
-    const saveTodo = (todoList: TTodoList): void => {
+    const saveTodo = (todoList: TTodoItemsArray): void => {
         if (Array.isArray(todoList)) {
             localStorage.setItem('todoList', JSON.stringify(todoList.map((item) => {
                 return {title: String(item.title), done: Boolean(item.done) }
@@ -29,17 +29,17 @@ export const useTodo = (): TTodoHook => {
 
     return {
         todoList,
-        doTodoAdd: (item: TTodoItemContent) => {
+        doTodoAdd: (item: TTodoContentInterface) => {
             const list = [...todoList, {...item, key: Date.now()}];
             saveTodo(list);
             setTodoList(list);
         },
-        doTodoDelete: (item: TTodoItemContent) => {
+        doTodoDelete: (item: TTodoContentInterface) => {
             const list = todoList.filter(_item => item !== _item);
             saveTodo(list)
             setTodoList(list);
         },
-        doTodoCheck: (item: TTodoItemContent) => {
+        doTodoCheck: (item: TTodoContentInterface) => {
             saveTodo(todoList);
         }
     }

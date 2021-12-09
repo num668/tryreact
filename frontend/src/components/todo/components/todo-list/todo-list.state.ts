@@ -1,8 +1,8 @@
 import { useState, useMemo } from "react";
-import { TTodoList } from "../commons/todo-types";
-import { TTodoListHook } from "./todo-list-types";
+import { TTodoItemsArray } from "../../../../commons/types";
+import { TTodoListHook } from "./types";
 
-export const useTodoList = (todoList: TTodoList): TTodoListHook => {
+export const useTodoList = (todoList: TTodoItemsArray): TTodoListHook => {
     const [todoFilter, setTodoFilter] = useState({title: '', done: undefined});
     
     const todoList1 = useMemo(() => {

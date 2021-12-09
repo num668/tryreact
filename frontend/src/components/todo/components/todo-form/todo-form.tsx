@@ -1,8 +1,8 @@
-import { useTodoForm } from './todo-form-hook';
-import { TryInput } from '../../ui/base-input';
-import { TTodoFunc, TTodoItemContent } from '../commons/todo-types';
+import { useTodoForm } from './todo-form.state';
+import { TryInput } from '../../../ui/base-input';
+import { TTodoFunction, TTodoContentInterface } from '../../../../commons/types';
 
-export const TodoForm = (props: {todoItem: TTodoItemContent | undefined, doTodoAdd: TTodoFunc}): JSX.Element => {
+export const TodoForm = (props: {todoItem: TTodoContentInterface | undefined, doTodoAdd: TTodoFunction}): JSX.Element => {
   const hookTodoForm = useTodoForm(props.todoItem ?? {title: '', done: false}, props.doTodoAdd);
 
   return (

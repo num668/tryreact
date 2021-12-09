@@ -1,6 +1,6 @@
-import { TodoList } from './todo-list';
-import { TodoForm } from './todo-form';
-import { useTodo } from "./todo-hook";
+import { TodoList } from './components/todo-list';
+import { TodoForm } from './components/todo-form';
+import { useTodo } from "./todo.state";
 
 export const Todo = (): JSX.Element => {
   //-reset local storage-

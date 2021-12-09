@@ -1,8 +1,8 @@
 //import styled from 'styled-components';
-import { useTodoList } from './todo-list-hook';
-import { TodoFilter } from './components/todo-filter';
-import { TodoItem } from './components/todo-item';
-import { TTodoFunc, TTodoList } from '../commons/todo-types';
+import { useTodoList } from './todo-list.state';
+import { TodoFilter } from '../todo-filter';
+import { TodoItem } from './todo-item';
+import { TTodoFunction, TTodoItemsArray } from '../../../../commons/types';
 
 /*const TodoItemStylerd = styled(TodoItem)`
   background-color: ${(props) => Number(props.index) & 1 ? "#fdd": "fff"};
@@ -12,7 +12,7 @@ import { TTodoFunc, TTodoList } from '../commons/todo-types';
   align-items: center;
 `;*/
 
-export const TodoList = (props: {todoList: TTodoList, doTodoCheck: TTodoFunc, doTodoDelete: TTodoFunc}): JSX.Element => {
+export const TodoList = (props: {todoList: TTodoItemsArray, doTodoCheck: TTodoFunction, doTodoDelete: TTodoFunction}): JSX.Element => {
   const hookTodoList = useTodoList(props.todoList);
   
   return (<div>
